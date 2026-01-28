@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>الصناعي المزدوج | فنّي مصر</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap');
+    
+    :root {
+      --main-color: #800000;
+      --dark-red: #660000;
+      --light-bg: #f9f9f9;
+      --card-bg: #ffffff;
+    }
+    
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    body {
+      font-family: 'Cairo', sans-serif;
+      background-color: var(--light-bg);
+      color: #333;
+      line-height: 1.6;
+    }
+    
+    /* Header Styles */
+    header {
+      background: linear-gradient(135deg, var(--main-color), var(--dark-red));
+      color: white;
+      padding: 40px 20px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    header::before {
+      content: '';
+      position: absolute;
+      top: -50px;
+      left: -50px;
+      width: 200px;
+      height: 200px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 50%;
+    }
+    
+    .header-content {
+      position: relative;
+      z-index: 2;
+    }
+    
+    header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+    }
+    
+    /* Navigation */
+    nav {
+      display: flex;
+      justify-content: center;
+      background-color: var(--dark-red);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    
+    nav a {
+      color: white;
+      padding: 18px 22px;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      font-size: 1.05rem;
+      position: relative;
+    }
+    
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      right: 50%;
+      transform: translateX(50%);
+      width: 0;
+      height: 3px;
+      background: white;
+      transition: all 0.3s;
+    }
+    
+    nav a:hover::after {
+      width: 70%;
+    }
+    
+    nav a i {
+      margin-left: 8px;
+    }
+    
+    /* Main Content */
+    .container {
+      max-width: 1200px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+    
+    /* Hero Section */
+    .hero {
+      display: flex;
+      align-items: center;
+      background: white;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      margin-bottom: 50px;
+    }
+    
+    .hero-img {
+      flex: 1;
+      height: 400px;
+      overflow: hidden;
+    }
+    
+    .hero-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    .hero-content {
+      flex: 1;
+      padding: 40px;
+    }
+    
+    .hero-content h2 {
+      color: var(--main-color);
+      font-size: 2rem;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .hero-content p {
+      color: #555;
+      margin-bottom: 25px;
+      font-size: 1.1rem;
+      line-height: 1.8;
+    }
+    
+    /* Features Section */
+    .features {
+      margin: 60px 0;
+    }
+    
+    .section-title {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    
+    .section-title h2 {
+      color: var(--main-color);
+      font-size: 2rem;
+      margin-bottom: 10px;
+    }
+    
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+    }
+    
+    .feature-card {
+      background: white;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+      text-align: center;
+      transition: transform 0.3s;
+    }
+    
+    .feature-card:hover {
+      transform: translateY(-10px);
+    }
+    
+    .feature-icon {
+      background: var(--main-color);
+      color: white;
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+      font-size: 1.8rem;
+    }
+    
+    .feature-card h3 {
+      color: var(--main-color);
+      margin-bottom: 15px;
+      font-size: 1.4rem;
+    }
+    
+    /* Specializations List */
+    .specializations-list {
+      background: white;
+      border-radius: 15px;
+      padding: 40px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+      margin: 60px 0;
+    }
+    
+    .spec-item {
+      display: flex;
+      align-items: flex-start;
+      padding: 20px;
+      border-bottom: 1px dashed #eee;
+    }
+    
+    .spec-item:last-child {
+      border-bottom: none;
+    }
+    
+    .spec-icon {
+      background: #f0f0f0;
+      color: var(--main-color);
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-left: 20px;
+      flex-shrink: 0;
+    }
+    
+    .spec-info h3 {
+      color: var(--main-color);
+      margin-bottom: 10px;
+    }
+    
+    /* Timeline */
+    .timeline {
+      position: relative;
+      max-width: 800px;
+      margin: 60px auto;
+    }
+    
+    .timeline::before {
+      content: '';
+      position: absolute;
+      right: 50%;
+      transform: translateX(50%);
+      width: 4px;
+      height: 100%;
+      background: var(--main-color);
+    }
+    
+    .timeline-item {
+      background: white;
+      padding: 25px;
+      border-radius: 10px;
+      box-shadow: 0 3px 15px rgba(0,0,0,0.1);
+      margin-bottom: 30px;
+      position: relative;
+      width: calc(50% - 40px);
+    }
+    
+    .timeline-item:nth-child(odd) {
+      margin-right: auto;
+    }
+    
+    .timeline-item:nth-child(even) {
+      margin-left: auto;
+    }
+    
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      top: 25px;
+      width: 20px;
+      height: 20px;
+      background: var(--main-color);
+      border-radius: 50%;
+    }
+    
+    .timeline-item:nth-child(odd)::before {
+      left: -52px;
+    }
+    
+    .timeline-item:nth-child(even)::before {
+      right: -52px;
+    }
+    
+    .timeline-item h3 {
+      color: var(--main-color);
+      margin-bottom: 10px;
+    }
+    
+    /* Requirements Section */
+    .requirements {
+      background: linear-gradient(135deg, var(--main-color), var(--dark-red));
+      color: white;
+      padding: 50px;
+      border-radius: 15px;
+      margin: 60px 0;
+    }
+    
+    .requirements h2 {
+      text-align: center;
+      margin-bottom: 30px;
+      font-size: 2rem;
+    }
+    
+    .req-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+    
+    .req-item {
+      background: rgba(255,255,255,0.1);
+      padding: 20px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+    
+    /* Buttons */
+    .spec-link {
+      display: inline-block;
+      padding: 12px 25px;
+      background: var(--main-color);
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: bold;
+      transition: all 0.3s;
+      margin-top: 15px;
+      border: none;
+      cursor: pointer;
+    }
+    
+    .spec-link:hover {
+      background: var(--dark-red);
+      transform: translateY(-3px);
+    }
+    
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin: 40px auto;
+      padding: 14px 30px;
+      background: var(--main-color);
+      color: white;
+      text-decoration: none;
+      border-radius: 50px;
+      transition: all 0.3s;
+      font-weight: bold;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    
+    .back-btn:hover {
+      background: var(--dark-red);
+      transform: translateY(-3px);
+    }
+    
+    /* Footer */
+    footer {
+      text-align: center;
+      background: linear-gradient(135deg, var(--main-color), var(--dark-red));
+      color: white;
+      padding: 30px;
+      margin-top: 70px;
+    }
+    
+    .social-links {
+      margin: 20px 0;
+    }
+    
+    .social-links a {
+      color: white;
+      font-size: 1.5rem;
+      margin: 0 12px;
+      transition: all 0.3s;
+    }
+    
+    .social-links a:hover {
+      transform: translateY(-5px);
+    }
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+      header h1 {
+        font-size: 2rem;
+      }
+      
+      nav a {
+        padding: 15px 18px;
+        font-size: 0.95rem;
+      }
+      
+      .hero {
+        flex-direction: column;
+      }
+      
+      .hero-img {
+        height: 250px;
+        width: 100%;
+      }
+      
+      .timeline::before {
+        right: 30px;
+      }
+      
+      .timeline-item {
+        width: calc(100% - 80px);
+        margin-right: auto !important;
+        margin-left: auto !important;
+      }
+      
+      .timeline-item:nth-child(odd)::before,
+      .timeline-item:nth-child(even)::before {
+        right: -42px;
+        left: auto;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-content">
+      <h1><i class="fas fa-handshake"></i> نظام التعليم المزدوج</h1>
+      <p>دمج الدراسة النظرية بالتدريب العملي لإعداد كوادر فنية مؤهلة</p>
+    </div>
+  </header>
+
+  <nav>
+    <a href="index.html"><i class="fas fa-home"></i> الرئيسية</a>
+    <a href="takasosat.html"><i class="fas fa-graduation-cap"></i> التخصصات</a>
+    <a href="manahij.html"><i class="fas fa-book"></i> المناهج</a>
+    <a href="mashroo3.html"><i class="fas fa-project-diagram"></i> المشاريع</a>
+    <a href="contact.html"><i class="fas fa-envelope"></i> تواصل معنا</a>
+  </nav>
+
+  <div class="container">
+    <!-- Hero Section -->
+    <div class="hero">
+      <div class="hero-img">
+        <img src="images/dual-system.jpg" alt="نظام التعليم المزدوج" onerror="this.src='https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80'">
+      </div>
+      <div class="hero-content">
+        <h2><i class="fas fa-handshake"></i> ما هو النظام المزدوج؟</h2>
+        <p>
+          نظام التعليم المزدوج هو نموذج تعليمي متطور يجمع بين الدراسة النظرية في المدارس الفنية 
+          والتدريب العملي في المصانع والشركات. يتم تقسيم وقت الطالب بين الموقعين بالتساوي تقريباً، 
+          مما يضمن حصوله على تعليم متكامل ومتوازن.
+        </p>
+        <p>
+          يهدف النظام إلى تخريج كوادر فنية مؤهلة ومدربة تدريباً عملياً مكثفاً، 
+          قادرة على الانخراط في سوق العمل فور تخرجها دون الحاجة إلى فترة تدريب إضافية.
+        </p>
+        <a href="#apply" class="spec-link">قدم الآن</a>
+      </div>
+    </div>
+
+    <!-- Key Features -->
+    <div class="features">
+      <div class="section-title">
+        <h2><i class="fas fa-star"></i> مميزات النظام المزدوج</h2>
+        <p>اكتشف الفوائد والامتيازات الفريدة</p>
+      </div>
+      
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-graduation-cap"></i>
+          </div>
+          <h3>تعليم متكامل</h3>
+          <p>دمج النظرية مع التطبيق العملي في بيئة العمل الحقيقية</p>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-money-bill-wave"></i>
+          </div>
+          <h3>مكافأة مالية</h3>
+          <p>حصول الطالب على مكافأة شهرية أثناء فترة التدريب العملي</p>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-briefcase"></i>
+          </div>
+          <h3>فرص توظيف</h3>
+          <p>نسبة توظيف عالية تصل إلى 95% للخريجين في أماكن تدريبهم</p>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-certificate"></i>
+          </div>
+          <h3>شهادات معتمدة</h3>
+          <p>حصول الطالب على دبلوم فني + شهادة خبرة عملية</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Specializations List -->
+    <div class="specializations-list">
+      <div class="section-title">
+        <h2><i class="fas fa-cogs"></i> التخصصات المتاحة</h2>
+        <p>تشعبات النظام المزدوج في التعليم الصناعي</p>
+      </div>
+      
+      <div class="spec-items">
+        <div class="spec-item">
+          <div class="spec-icon">
+            <i class="fas fa-bolt"></i>
+          </div>
+          <div class="spec-info">
+            <h3>تشعبة الكهرباء</h3>
+            <p>تركيب وصيانة الأنظمة الكهربائية والتحكم الآلي</p>
+          </div>
+        </div>
+        
+        <div class="spec-item">
+          <div class="spec-icon">
+            <i class="fas fa-cogs"></i>
+          </div>
+          <div class="spec-info">
+            <h3>تشعبة الميكانيكا</h3>
+            <p>تشغيل وصيانة المعدات والآلات الصناعية</p>
+          </div>
+        </div>
+        
+        <div class="spec-item">
+          <div class="spec-icon">
+            <i class="fas fa-car"></i>
+          </div>
+          <div class="spec-info">
+            <h3>تشعبة السيارات</h3>
+            <p>صيانة وإصلاح السيارات والمحركات</p>
+          </div>
+        </div>
+        
+        <div class="spec-item">
+          <div class="spec-icon">
+            <i class="fas fa-laptop-code"></i>
+          </div>
+          <div class="spec-info">
+            <h3>تشعبة الحاسبات</h3>
+            <p>برمجة وصيانة الحواسيب والشبكات</p>
+          </div>
+        </div>
+        
+        <div class="spec-item">
+          <div class="spec-icon">
+            <i class="fas fa-robot"></i>
+          </div>
+          <div class="spec-info">
+            <h3>تشعبة الميكاترونكس</h3>
+            <p>دمج الميكانيكا والإلكترونيات والبرمجة</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Timeline -->
+    <div class="section-title">
+      <h2><i class="fas fa-calendar-alt"></i> مراحل الدراسة</h2>
+      <p>الخطوات الزمنية لنظام التعليم المزدوج</p>
+    </div>
+    
+    <div class="timeline">
+      <div class="timeline-item">
+        <h3>السنة الأولى</h3>
+        <p>60% دراسة نظرية في المدرسة - 40% تدريب عملي مبدئي في المصانع</p>
+        <p><strong>التركيز:</strong> الأساسيات النظرية والتعرف على بيئة العمل</p>
+      </div>
+      
+      <div class="timeline-item">
+        <h3>السنة الثانية</h3>
+        <p>50% دراسة نظرية - 50% تدريب عملي متخصص</p>
+        <p><strong>التركيز:</strong> التطبيق العملي للمهارات المكتسبة</p>
+      </div>
+      
+      <div class="timeline-item">
+        <h3>السنة الثالثة</h3>
+        <p>40% دراسة نظرية - 60% تدريب عملي مكثف</p>
+        <p><strong>التركيز:</strong> الإتقان العملي والاستعداد لسوق العمل</p>
+      </div>
+      
+      <div class="timeline-item">
+        <h3>بعد التخرج</h3>
+        <p>توظيف مباشر في مكان التدريب أو مؤسسات أخرى</p>
+        <p><strong>المميزات:</strong> أولوية التوظيف، راتب تنافسي، خبرة عملية</p>
+      </div>
+    </div>
+
+    <!-- Requirements -->
+    <div class="requirements" id="apply">
+      <h2><i class="fas fa-clipboard-check"></i> شروط القبول</h2>
+      <div class="req-list">
+        <div class="req-item">
+          <i class="fas fa-user-graduate"></i>
+          <span>الحصول على الشهادة الإعدادية أو ما يعادلها</span>
+        </div>
+        
+        <div class="req-item">
+          <i class="fas fa-birthday-cake"></i>
+          <span>ألا يزيد السن عن 18 سنة في أول أكتوبر</span>
+        </div>
+        
+        <div class="req-item">
+          <i class="fas fa-stethoscope"></i>
+          <span>اللياقة الصحية للعمل في البيئات الصناعية</span>
+        </div>
+        
+        <div class="req-item">
+          <i class="fas fa-file-alt"></i>
+          <span>اجتياز المقابلة الشخصية والاختبارات</span>
+        </div>
+      </div>
+      
+      <div style="text-align: center; margin-top: 30px;">
+        <a href="apply-dual.html" class="spec-link" style="background: white; color: var(--main-color);">
+          <i class="fas fa-file-signature"></i> قدم طلب الالتحاق الآن
+        </a>
+      </div>
+    </div>
+
+    <!-- Partners -->
+    <div class="section-title">
+      <h2><i class="fas fa-handshake"></i> شركاؤنا في التدريب</h2>
+      <p>أبرز الشركات والمصانع المشاركة في النظام</p>
+    </div>
+    
+    <div style="background: white; padding: 30px; border-radius: 15px; margin: 40px 0; text-align: center;">
+      <p style="font-size: 1.2rem; color: #555; margin-bottom: 20px;">
+        يشارك في نظام التعليم المزدوج أكثر من 500 شركة ومصنع على مستوى الجمهورية، 
+        من بينها كبرى الشركات في المجالات الصناعية المختلفة.
+      </p>
+      <div style="display: flex; justify-content: center; flex-wrap: wrap; gap: 30px; margin-top: 30px;">
+        <div style="padding: 15px; background: #f9f9f9; border-radius: 10px;">
+          <i class="fas fa-industry" style="font-size: 2rem; color: var(--main-color);"></i>
+          <p style="margin-top: 10px; font-weight: bold;">المصانع الكبرى</p>
+        </div>
+        <div style="padding: 15px; background: #f9f9f9; border-radius: 10px;">
+          <i class="fas fa-car" style="font-size: 2rem; color: var(--main-color);"></i>
+          <p style="margin-top: 10px; font-weight: bold;">شركات السيارات</p>
+        </div>
+        <div style="padding: 15px; background: #f9f9f9; border-radius: 10px;">
+          <i class="fas fa-plug" style="font-size: 2rem; color: var(--main-color);"></i>
+          <p style="margin-top: 10px; font-weight: bold;">شركات الكهرباء</p>
+        </div>
+        <div style="padding: 15px; background: #f9f9f9; border-radius: 10px;">
+          <i class="fas fa-laptop" style="font-size: 2rem; color: var(--main-color);"></i>
+          <p style="margin-top: 10px; font-weight: bold;">شركات التكنولوجيا</p>
+        </div>
+      </div>
+    </div>
+
+    <div style="text-align: center;">
+      <a href="takasosat.html" class="back-btn">
+        <i class="fas fa-arrow-right"></i> العودة إلى التخصصات
+      </a>
+    </div>
+  </div>
+
+  <footer>
+    <div class="social-links">
+      <a href="#"><i class="fab fa-facebook"></i></a>
+      <a href="#"><i class="fab fa-twitter"></i></a>
+      <a href="#"><i class="fab fa-youtube"></i></a>
+      <a href="#"><i class="fab fa-instagram"></i></a>
+    </div>
+    <p>&copy; 2025 فنّي مصر - جميع الحقوق محفوظة</p>
+    <p>صمم بكل ❤️ لخدمة طلاب التعليم الفني</p>
+  </footer>
+
+  <script>
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        
+        const targetId = this.getAttribute('href');
+        if(targetId === '#') return;
+        
+        const targetElement = document.querySelector(targetId);
+        if(targetElement) {
+          window.scrollTo({
+            top: targetElement.offsetTop - 100,
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
+    
+    // Highlight current page in nav
+    const currentPage = 'dual-system.html';
+    document.querySelectorAll('nav a').forEach(link => {
+      if(link.getAttribute('href') === currentPage) {
+        link.style.fontWeight = 'bold';
+        link.style.color = '#ffd700';
+      }
+    });
+  </script>
+</body>
+</html>

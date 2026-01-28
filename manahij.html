@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>المناهج الدراسية | فنّي مصر</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap');
+    
+    :root {
+      --main-color: #800000;
+      --dark-red: #660000;
+      --light-bg: #f9f9f9;
+      --text-color: #333;
+      --light-gray: #f5f5f5;
+    }
+    
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    body {
+      font-family: 'Cairo', sans-serif;
+      background-color: var(--light-bg);
+      color: var(--text-color);
+      line-height: 1.6;
+    }
+    
+    /* Header Styles */
+    header {
+      background: linear-gradient(135deg, var(--main-color), var(--dark-red));
+      color: white;
+      padding: 40px 20px;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    header::before {
+      content: '';
+      position: absolute;
+      top: -50px;
+      right: -50px;
+      width: 200px;
+      height: 200px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 50%;
+    }
+    
+    header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+      position: relative;
+    }
+    
+    header p {
+      font-size: 1.1rem;
+      opacity: 0.9;
+    }
+    
+    /* Navigation */
+    nav {
+      display: flex;
+      justify-content: center;
+      background-color: var(--dark-red);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    
+    nav a {
+      color: white;
+      padding: 18px 22px;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      font-size: 1.05rem;
+      position: relative;
+    }
+    
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      right: 50%;
+      transform: translateX(50%);
+      width: 0;
+      height: 3px;
+      background: white;
+      transition: all 0.3s;
+    }
+    
+    nav a:hover::after {
+      width: 70%;
+    }
+    
+    nav a i {
+      margin-left: 8px;
+    }
+    
+    /* Main Container */
+    .container {
+      max-width: 1200px;
+      margin: 40px auto;
+      padding: 0 20px;
+      animation: fadeIn 0.8s ease;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    /* Search Box */
+    .search-box {
+      position: relative;
+      margin: 50px auto;
+      width: 90%;
+      max-width: 600px;
+    }
+    
+    .search-box input {
+      width: 100%;
+      padding: 16px 60px 16px 25px;
+      border: none;
+      border-radius: 50px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+      font-size: 1.1rem;
+      transition: all 0.4s;
+      background: white;
+    }
+    
+    .search-box input:focus {
+      outline: none;
+      box-shadow: 0 8px 25px rgba(128, 0, 0, 0.15);
+    }
+    
+    .search-btn {
+      position: absolute;
+      left: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: var(--main-color);
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 45px;
+      height: 45px;
+      cursor: pointer;
+      transition: all 0.3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+    }
+    
+    .search-btn:hover {
+      background: var(--dark-red);
+      transform: translateY(-50%) scale(1.1);
+    }
+    
+    /* Specializations Tabs */
+    .spec-tabs {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 40px;
+      gap: 15px;
+    }
+    
+    .spec-tab {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 30px;
+      background: var(--light-gray);
+      border-radius: 50px;
+      cursor: pointer;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      font-weight: bold;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.05);
+    }
+    
+    .spec-tab i {
+      font-size: 1.2rem;
+      transition: all 0.3s;
+    }
+    
+    .spec-tab.active,
+    .spec-tab:hover {
+      background: linear-gradient(135deg, var(--main-color), var(--dark-red));
+      color: white;
+      box-shadow: 0 8px 20px rgba(128, 0, 0, 0.2);
+      transform: translateY(-3px);
+    }
+    
+    .spec-tab.active i,
+    .spec-tab:hover i {
+      transform: scale(1.2);
+    }
+    
+    /* Years Container */
+    .years-container {
+      display: none;
+      animation: fadeIn 0.6s ease;
+    }
+    
+    .years-container.active {
+      display: block;
+    }
+    
+    /* Year Title */
+    .year-title {
+      position: relative;
+      padding-right: 30px;
+      font-size: 1.6rem;
+      margin: 50px 0 30px;
+      color: var(--main-color);
+    }
+    
+    .year-title::after {
+      content: '';
+      position: absolute;
+      right: 0;
+      bottom: -12px;
+      width: 80px;
+      height: 4px;
+      background: linear-gradient(90deg, var(--main-color), transparent);
+      border-radius: 3px;
+    }
+    
+    /* Subjects Grid */
+    .subjects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 25px;
+      margin-bottom: 50px;
+    }
+    
+    /* Subject Card */
+    .subject-card {
+      background: white;
+      border-radius: 15px;
+      padding: 25px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      position: relative;
+      overflow: hidden;
+      border: 1px solid #eee;
+    }
+    
+    .subject-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 100%;
+      height: 5px;
+      background: linear-gradient(90deg, var(--main-color), #d40000);
+    }
+    
+    .subject-card:hover {
+      transform: translateY(-10px) scale(1.02);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+    }
+    
+    .subject-card h3 {
+      color: var(--main-color);
+      margin-bottom: 15px;
+      font-size: 1.3rem;
+      position: relative;
+      padding-right: 10px;
+    }
+    
+    .subject-card h3::after {
+      content: '';
+      position: absolute;
+      right: 0;
+      bottom: -5px;
+      width: 40px;
+      height: 2px;
+      background: var(--main-color);
+    }
+    
+    .subject-card p {
+      color: #555;
+      margin-bottom: 20px;
+      line-height: 1.7;
+    }
+    
+    /* Download Button */
+    .download-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 15px;
+      padding: 12px 25px;
+      background: var(--main-color);
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: bold;
+      transition: all 0.4s;
+      position: relative;
+      overflow: hidden;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(128, 0, 0, 0.2);
+    }
+    
+    .download-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 0;
+      height: 100%;
+      background: var(--dark-red);
+      transition: all 0.4s;
+      z-index: 0;
+    }
+    
+    .download-btn:hover::before {
+      width: 100%;
+      right: auto;
+      left: 0;
+    }
+    
+    .download-btn span {
+      position: relative;
+      z-index: 1;
+    }
+    
+    .download-btn i {
+      position: relative;
+      z-index: 1;
+      transition: all 0.3s;
+    }
+    
+    .download-btn:hover i {
+      transform: translateX(5px);
+    }
+    
+    /* CTA Section */
+    .cta-section {
+      background: linear-gradient(135deg, #f9f9f9, #f0f0f0);
+      border-radius: 20px;
+      padding: 50px;
+      margin: 70px auto;
+      max-width: 900px;
+      text-align: center;
+      border: 1px solid #eee;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .cta-section::before {
+      content: '';
+      position: absolute;
+      top: -50px;
+      left: -50px;
+      width: 200px;
+      height: 200px;
+      background: rgba(128, 0, 0, 0.05);
+      border-radius: 50%;
+    }
+    
+    .cta-content h3 {
+      color: var(--main-color);
+      font-size: 1.8rem;
+      margin-bottom: 15px;
+      position: relative;
+      display: inline-block;
+    }
+    
+    .cta-content h3::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      right: 0;
+      width: 50%;
+      height: 3px;
+      background: var(--main-color);
+      border-radius: 3px;
+    }
+    
+    .cta-content p {
+      font-size: 1.1rem;
+      color: #555;
+      max-width: 700px;
+      margin: 0 auto 25px;
+      line-height: 1.8;
+    }
+    
+    .cta-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 20px;
+      padding: 15px 35px;
+      background: var(--main-color);
+      color: white;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: all 0.4s;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .cta-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 0;
+      height: 100%;
+      background: var(--dark-red);
+      transition: all 0.4s;
+      z-index: 0;
+    }
+    
+    .cta-btn:hover::before {
+      width: 100%;
+      right: auto;
+      left: 0;
+    }
+    
+    .cta-btn span {
+      position: relative;
+      z-index: 1;
+    }
+    
+    .cta-btn i {
+      position: relative;
+      z-index: 1;
+      transition: all 0.3s;
+    }
+    
+    .cta-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    }
+    
+    .cta-btn:hover i {
+      transform: translateX(5px);
+    }
+    
+    /* Back Button */
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin: 40px auto;
+      padding: 14px 30px;
+      background: var(--main-color);
+      color: white;
+      text-decoration: none;
+      border-radius: 50px;
+      transition: all 0.4s;
+      font-weight: bold;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      border: 2px solid var(--main-color);
+    }
+    
+    .back-btn:hover {
+      background: white;
+      color: var(--main-color);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    }
+    
+    /* Footer */
+    footer {
+      text-align: center;
+      background: linear-gradient(135deg, var(--main-color), var(--dark-red));
+      color: white;
+      padding: 30px;
+      margin-top: 70px;
+      position: relative;
+    }
+    
+    footer::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 100%;
+      height: 10px;
+      background: linear-gradient(90deg, var(--dark-red), var(--main-color));
+    }
+    
+    footer p {
+      margin: 10px 0;
+    }
+    
+    .social-links {
+      margin: 20px 0;
+    }
+    
+    .social-links a {
+      color: white;
+      font-size: 1.5rem;
+      margin: 0 12px;
+      transition: all 0.3s;
+      display: inline-block;
+    }
+    
+    .social-links a:hover {
+      transform: translateY(-5px) scale(1.2);
+      color: #f1f1f1;
+    }
+    
+    /* Animations */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    .subject-card {
+      animation: fadeInUp 0.6s ease forwards;
+      opacity: 0;
+    }
+    
+    .subject-card:nth-child(1) { animation-delay: 0.1s; }
+    .subject-card:nth-child(2) { animation-delay: 0.2s; }
+    .subject-card:nth-child(3) { animation-delay: 0.3s; }
+    .subject-card:nth-child(4) { animation-delay: 0.4s; }
+    .subject-card:nth-child(5) { animation-delay: 0.5s; }
+    .subject-card:nth-child(6) { animation-delay: 0.6s; }
+    
+    /* Responsive */
+    @media (max-width: 992px) {
+      .subjects-grid {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      }
+    }
+    
+    @media (max-width: 768px) {
+      header h1 {
+        font-size: 2rem;
+      }
+      
+      nav a {
+        padding: 15px 18px;
+        font-size: 0.95rem;
+      }
+      
+      .spec-tabs {
+        flex-direction: column;
+        align-items: center;
+      }
+      
+      .spec-tab {
+        width: 100%;
+        max-width: 300px;
+        justify-content: center;
+      }
+      
+      .year-title {
+        font-size: 1.4rem;
+        text-align: center;
+        padding-right: 0;
+      }
+      
+      .year-title::after {
+        right: 50%;
+        transform: translateX(50%);
+      }
+      
+      .cta-section {
+        padding: 30px 20px;
+      }
+      
+      .cta-content h3 {
+        font-size: 1.5rem;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      header {
+        padding: 30px 15px;
+      }
+      
+      header h1 {
+        font-size: 1.8rem;
+      }
+      
+      .search-box input {
+        padding: 14px 50px 14px 20px;
+        font-size: 1rem;
+      }
+      
+      .subject-card {
+        padding: 20px;
+      }
+      
+      .download-btn {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1><i class="fas fa-book-open"></i> المناهج الدراسية</h1>
+    <p>جميع المناهج والمواد الدراسية للتخصصات الفنية بمصر</p>
+  </header>
+
+  <nav>
+    <a href="index.html"><i class="fas fa-home"></i> الرئيسية</a>
+    <a href="takasosat.html"><i class="fas fa-graduation-cap"></i> التخصصات</a>
+    <a href="manahij.html"><i class="fas fa-book"></i> المناهج</a>
+    <a href="mashroo3.html"><i class="fas fa-project-diagram"></i> المشاريع</a>
+    <a href="contact.html"><i class="fas fa-envelope"></i> تواصل معنا</a>
+  </nav>
+
+  <div class="container">
+    <div class="search-box">
+      <input type="text" placeholder="ابحث عن منهج أو مادة دراسية...">
+      <button class="search-btn"><i class="fas fa-search"></i></button>
+    </div>
+    
+    <div class="specializations">
+      <div class="spec-tabs">
+        <div class="spec-tab active" data-tab="industrial">
+          <i class="fas fa-cogs"></i>
+          <span>الصناعي</span>
+        </div>
+        <div class="spec-tab" data-tab="agricultural">
+          <i class="fas fa-leaf"></i>
+          <span>الزراعي</span>
+        </div>
+        <div class="spec-tab" data-tab="commercial">
+          <i class="fas fa-chart-line"></i>
+          <span>التجاري</span>
+        </div>
+        <div class="spec-tab" data-tab="hotel">
+          <i class="fas fa-utensils"></i>
+          <span>الفندقي</span>
+        </div>
+      </div>
+      
+      <!-- الصناعي -->
+      <div class="years-container active" id="industrial">
+        <h2 class="year-title">الصف الأول الصناعي</h2>
+        <div class="subjects-grid">
+          <div class="subject-card">
+            <h3>الرياضيات الفنية</h3>
+            <p>المنهج الكامل للرياضيات التطبيقية في المجال الصناعي مع تمارين وحلول</p>
+            <button class="download-btn">
+              <i class="fas fa-download"></i>
+              <span>تحميل المنهج</span>
+            </button>
+          </div>
+          
+          <div class="subject-card">
+            <h3>أساسيات الكهرباء</h3>
+            <p>مدخل إلى الدوائر الكهربائية والمكونات الإلكترونية الأساسية</p>
+            <button class="download-btn">
+              <i class="fas fa-download"></i>
+              <span>تحميل المنهج</span>
+            </button>
+          </div>
+          
+          <div class="subject-card">
+            <h3>الرسم الفني</h3>
+            <p>أساسيات الرسم الصناعي والهندسي باستخدام الأدوات المختلفة</p>
+            <button class="download-btn">
+              <i class="fas fa-download"></i>
+              <span>تحميل المنهج</span>
+            </button>
+          </div>
+          
+          <div class="subject-card">
+            <h3>اللغة العربية</h3>
+            <p>منهج اللغة العربية للتعليم الفني مع التركيز على المصطلحات الفنية</p>
+            <button class="download-btn">
+              <i class="fas fa-download"></i>
+              <span>تحميل المنهج</span>
+            </button>
+          </div>
+        </div>
+        
+        <h2 class="year-title">الصف الثاني الصناعي</h2>
+        <div class="subjects-grid">
+          <div class="subject-card">
+            <h3>دوائر كهربائية</h3>
+            <p>تحليل الدوائر الكهربائية وتصميم الأنظمة الكهربائية البسيطة</p>
+            <button class="download-btn">
+              <i class="fas fa-download"></i>
+              <span>تحميل المنهج</span>
+            </button>
+          </div>
+          
+          <div class="subject-card">
+            <h3>ميكانيكا</h3>
+            <p>أساسيات الميكانيكا الهندسية وتطبيقاتها في المجال الصناعي</p>
+            <button class="download-btn">
+              <i class="fas fa-download"></i>
+              <span>تحميل المنهج</span>
+            </button>
+          </div>
+          
+          <div class="subject-card">
+            <h3>التحكم الآلي</h3>
+            <p>مبادئ أنظمة التحكم الآلي والروبوتات الصناعية</p>
+            <button class="download-btn">
+              <i class="fas fa-download"></i>
+              <span>تحميل المنهج</span>
+            </button>
+          </div>
+        </div>
+      </div>
+      
+      <!-- الزراعي -->
+      <div class="years-container" id="agricultural">
+        <h2 class="year-title">الصف الأول الزراعي</h2>
+        <div class="subjects-grid">
+          <div class="subject-card">
+            <h3>أساسيات الزراعة</h3>
+            <p>مدخل إلى علوم الزراعة وتقنيات الإنتاج النباتي</p>
+            <button class="download-btn">
+              <i class="fas fa-download"></i>
+              <span>تحميل المنهج</span>
+            </button>
+          </div>
+          
+          <div class="subject-card">
+            <h3>علم التربة</h3>
+            <p>خصائص التربة الزراعية وأساليب تحسينها</p>
+            <button class="download-btn">
+              <i class="fas fa-download"></i>
+              <span>تحميل المنهج</span>
+            </button>
+          </div>
+          
+          <div class="subject-card">
+            <h3>الإنتاج الحيواني</h3>
+            <p>أساسيات تربية الحيوانات والدواجن وإدارة المزارع</p>
+            <button class="download-btn">
+              <i class="fas fa-download"></i>
+              <span>تحميل المنهج</span>
+            </button>
+          </div>
+        </div>
+      </div>
+      
+      <!-- التجاري -->
+      <div class="years-container" id="commercial">
+        <h2 class="year-title">الصف الأول التجاري</h2>
+        <div class="subjects-grid">
+          <div class="subject-card">
+            <h3>مبادئ المحاسبة</h3>
+            <p>أساسيات المحاسبة المالية ونظم التسجيل المحاسبي</p>
+            <button class="download-btn">
+              <i class="fas fa-download"></i>
+              <span>تحميل المنهج</span>
+            </button>
+          </div>
+          
+          <div class="subject-card">
+            <h3>إدارة أعمال</h3>
+            <p>مقدمة في إدارة الأعمال والمشاريع التجارية</p>
+            <button class="download-btn">
+              <i class="fas fa-download"></i>
+              <span>تحميل المنهج</span>
+            </button>
+          </div>
+          
+          <div class="subject-card">
+            <h3>التسويق</h3>
+            <p>أساسيات التسويق واستراتيجيات البيع والترويج</p>
+            <button class="download-btn">
+              <i class="fas fa-download"></i>
+              <span>تحميل المنهج</span>
+            </button>
+          </div>
+        </div>
+      </div>
+      
+      <!-- الفندقي -->
+      <div class="years-container" id="hotel">
+        <h2 class="year-title">الصف الأول الفندقي</h2>
+        <div class="subjects-grid">
+          <div class="subject-card">
+            <h3>إدارة الفنادق</h3>
+            <p>أساسيات إدارة المنشآت الفندقية وخدمة العملاء</p>
+            <button class="download-btn">
+              <i class="fas fa-download"></i>
+              <span>تحميل المنهج</span>
+            </button>
+          </div>
+          
+          <div class="subject-card">
+            <h3>فنون الطهي</h3>
+            <p>مبادئ الطهي الأساسية وتقنيات إعداد الطعام</p>
+            <button class="download-btn">
+              <i class="fas fa-download"></i>
+              <span>تحميل المنهج</span>
+            </button>
+          </div>
+          
+          <div class="subject-card">
+            <h3>خدمة السياحة</h3>
+            <p>أساسيات صناعة السياحة وإدارة الرحلات السياحية</p>
+            <button class="download-btn">
+              <i class="fas fa-download"></i>
+              <span>تحميل المنهج</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <section class="cta-section">
+      <div class="cta-content">
+        <h3><i class="fas fa-question-circle"></i> لم تجد ما تبحث عنه؟</h3>
+        <p>يمكنك طلب منهج معين وسنقوم بإضافته إلى المكتبة في أقرب وقت ممكن</p>
+        <a href="contact.html" class="cta-btn">
+          <i class="fas fa-paper-plane"></i>
+          <span>تواصل معنا</span>
+        </a>
+      </div>
+    </section>
+    
+    <div style="text-align: center;">
+      <a href="index.html" class="back-btn">
+        <i class="fas fa-arrow-right"></i>
+        <span>العودة للرئيسية</span>
+      </a>
+    </div>
+  </div>
+
+  <footer>
+    <div class="social-links">
+      <a href="#"><i class="fab fa-facebook"></i></a>
+      <a href="#"><i class="fab fa-twitter"></i></a>
+      <a href="#"><i class="fab fa-youtube"></i></a>
+      <a href="#"><i class="fab fa-instagram"></i></a>
+    </div>
+    <p>&copy; 2025 فنّي مصر - جميع الحقوق محفوظة</p>
+    <p>صمم بكل ❤️ لخدمة طلاب التعليم الفني في مصر</p>
+  </footer>
+
+  <script>
+    // تبويب التخصصات
+    const tabs = document.querySelectorAll('.spec-tab');
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        // إزالة النشاط من جميع التبويبات
+        tabs.forEach(t => t.classList.remove('active'));
+        // إضافة النشاط للتبويب المحدد
+        tab.classList.add('active');
+        
+        // إخفاء جميع المحتويات
+        document.querySelectorAll('.years-container').forEach(container => {
+          container.classList.remove('active');
+        });
+        
+        // إظهار المحتوى المحدد
+        const tabId = tab.getAttribute('data-tab');
+        document.getElementById(tabId).classList.add('active');
+      });
+    });
+    
+    // وظيفة البحث
+    const searchInput = document.querySelector('.search-box input');
+    searchInput.addEventListener('input', (e) => {
+      const searchTerm = e.target.value.toLowerCase();
+      const cards = document.querySelectorAll('.subject-card');
+      
+      cards.forEach(card => {
+        const title = card.querySelector('h3').textContent.toLowerCase();
+        const desc = card.querySelector('p').textContent.toLowerCase();
+        
+        if (title.includes(searchTerm) || desc.includes(searchTerm)) {
+          card.style.display = 'block';
+          card.style.animation = 'fadeInUp 0.5s ease forwards';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    });
+    
+    // تأثير التحميل التدريجي للبطاقات
+    document.addEventListener('DOMContentLoaded', () => {
+      const cards = document.querySelectorAll('.subject-card');
+      cards.forEach((card, index) => {
+        card.style.animationDelay = `${index * 0.1}s`;
+      });
+    });
+  </script>
+</body>
+</html>

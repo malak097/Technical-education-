@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>التخصص الزراعي | فنّي مصر</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap');
+    
+    :root {
+      --main-green: #2e7d32;
+      --dark-green: #1b5e20;
+      --light-bg: #f9f9f9;
+      --card-bg: #ffffff;
+    }
+    
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    body {
+      font-family: 'Cairo', sans-serif;
+      background-color: var(--light-bg);
+      color: #333;
+      line-height: 1.6;
+    }
+    
+    /* Header Styles */
+    header {
+      background: linear-gradient(135deg, var(--main-green), var(--dark-green));
+      color: white;
+      padding: 40px 20px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    header::before {
+      content: '';
+      position: absolute;
+      top: -50px;
+      left: -50px;
+      width: 200px;
+      height: 200px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 50%;
+    }
+    
+    header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+    }
+    
+    /* Navigation */
+    nav {
+      display: flex;
+      justify-content: center;
+      background-color: var(--dark-green);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    
+    nav a {
+      color: white;
+      padding: 18px 22px;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      font-size: 1.05rem;
+      position: relative;
+    }
+    
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      right: 50%;
+      transform: translateX(50%);
+      width: 0;
+      height: 3px;
+      background: white;
+      transition: all 0.3s;
+    }
+    
+    nav a:hover::after {
+      width: 70%;
+    }
+    
+    nav a i {
+      margin-left: 8px;
+    }
+    
+    /* Main Content */
+    .container {
+      max-width: 1200px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+    
+    /* Specialization Header */
+    .spec-header {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+    
+    .spec-header img {
+      width: 100%;
+      max-width: 600px;
+      border-radius: 15px;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+      margin-bottom: 25px;
+    }
+    
+    .spec-header h2 {
+      color: var(--main-green);
+      font-size: 2rem;
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
+    }
+    
+    .spec-header h2 i {
+      font-size: 2.5rem;
+    }
+    
+    .spec-header p {
+      max-width: 800px;
+      margin: 0 auto;
+      font-size: 1.1rem;
+      color: #555;
+      line-height: 1.8;
+    }
+    
+    /* Branches */
+    .branches {
+      margin: 60px 0;
+    }
+    
+    .branches h3 {
+      color: var(--main-green);
+      font-size: 1.8rem;
+      margin-bottom: 30px;
+      padding-right: 15px;
+      border-right: 5px solid var(--main-green);
+    }
+    
+    .branches-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+      gap: 30px;
+    }
+    
+    .branch-card {
+      background: var(--card-bg);
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    
+    .branch-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+    }
+    
+    .branch-img {
+      height: 200px;
+      overflow: hidden;
+    }
+    
+    .branch-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s;
+    }
+    
+    .branch-card:hover .branch-img img {
+      transform: scale(1.1);
+    }
+    
+    .branch-content {
+      padding: 25px;
+    }
+    
+    .branch-content h4 {
+      color: var(--main-green);
+      font-size: 1.5rem;
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .branch-content h4 i {
+      font-size: 1.8rem;
+    }
+    
+    .branch-content p {
+      color: #555;
+      margin-bottom: 20px;
+      line-height: 1.7;
+    }
+    
+    .branch-details {
+      margin: 25px 0;
+    }
+    
+    .branch-details ul {
+      list-style: none;
+    }
+    
+    .branch-details li {
+      padding: 8px 0;
+      border-bottom: 1px dashed #eee;
+      display: flex;
+      align-items: center;
+    }
+    
+    .branch-details i {
+      color: var(--main-green);
+      margin-left: 10px;
+    }
+    
+    /* Career Opportunities */
+    .career-opportunities {
+      margin: 60px 0;
+      background: var(--card-bg);
+      padding: 40px;
+      border-radius: 15px;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    }
+    
+    .career-opportunities h3 {
+      color: var(--main-green);
+      font-size: 1.8rem;
+      margin-bottom: 30px;
+      padding-right: 15px;
+      border-right: 5px solid var(--main-green);
+    }
+    
+    .jobs-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 20px;
+    }
+    
+    .job-item {
+      background: #f5f5f5;
+      padding: 20px;
+      border-radius: 10px;
+      transition: all 0.3s;
+    }
+    
+    .job-item:hover {
+      background: var(--main-green);
+      color: white;
+      transform: translateY(-5px);
+    }
+    
+    .job-item h4 {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+    
+    /* Back Button */
+    .back-btn {
+      display: inline-block;
+      margin: 40px auto;
+      padding: 14px 30px;
+      background: var(--main-green);
+      color: white;
+      text-decoration: none;
+      border-radius: 50px;
+      transition: all 0.3s;
+      font-weight: bold;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+    
+    .back-btn:hover {
+      background: var(--dark-green);
+      transform: translateY(-3px);
+    }
+    
+    /* Footer */
+    footer {
+      text-align: center;
+      background: linear-gradient(135deg, var(--main-green), var(--dark-green));
+      color: white;
+      padding: 30px;
+      margin-top: 70px;
+    }
+    
+    .social-links {
+      margin: 20px 0;
+    }
+    
+    .social-links a {
+      color: white;
+      font-size: 1.5rem;
+      margin: 0 12px;
+      transition: all 0.3s;
+    }
+    
+    .social-links a:hover {
+      transform: translateY(-5px);
+    }
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+      header h1 {
+        font-size: 2rem;
+      }
+      
+      nav a {
+        padding: 15px 18px;
+        font-size: 0.95rem;
+      }
+      
+      .branches-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .career-opportunities {
+        padding: 30px 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1><i class="fas fa-leaf"></i> التخصص الزراعي</h1>
+    <p>أقسام وتشعبات التعليم الزراعي في مصر</p>
+  </header>
+
+  <nav>
+    <a href="index.html"><i class="fas fa-home"></i> الرئيسية</a>
+    <a href="takasosat.html"><i class="fas fa-graduation-cap"></i> التخصصات</a>
+    <a href="manahij.html"><i class="fas fa-book"></i> المناهج</a>
+    <a href="mashroo3.html"><i class="fas fa-project-diagram"></i> المشاريع</a>
+    <a href="contact.html"><i class="fas fa-envelope"></i> تواصل معنا</a>
+  </nav>
+
+  <div class="container">
+    <div class="spec-header">
+      <img src="images\11.jpg" alt="التخصص الزراعي">
+      <h2><i class="fas fa-seedling"></i> التعليم الزراعي في مصر</h2>
+      <p>
+        يهدف التخصص الزراعي إلى إعداد كوادر فنية متخصصة في المجالات الزراعية المختلفة،
+        مع التركيز على التطبيقات العملية والتقنيات الحديثة في الزراعة لمواكبة متطلبات سوق العمل.
+      </p>
+    </div>
+    
+    <div class="branches">
+      <h3><i class="fas fa-sitemap"></i> تشعبات التخصص الزراعي</h3>
+      
+      <div class="branches-grid">
+        <!-- إنتاج نباتي -->
+        <div class="branch-card">
+          <div class="branch-img">
+            <img src="images\22.jpeg" alt="إنتاج نباتي">
+          </div>
+          <div class="branch-content">
+            <h4><i class="fas fa-spa"></i> إنتاج نباتي</h4>
+            <p>يشمل زراعة المحاصيل الحقلية والبستانية وإدارة المزارع</p>
+            
+            <div class="branch-details">
+              <ul>
+                <li><i class="fas fa-book"></i> المواد: وقاية نبات، تربة وأسمدة</li>
+                <li><i class="fas fa-clock"></i> مدة الدراسة: 3 سنوات</li>
+                <li><i class="fas fa-user-graduate"></i> مؤهل: دبلوم زراعي نظام 3 سنوات</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        
+        <!-- إنتاج حيواني -->
+        <div class="branch-card">
+          <div class="branch-img">
+            <img src="images/33.jpg" alt="إنتاج حيواني">
+          </div>
+          <div class="branch-content">
+            <h4><i class="fas fa-cow"></i> إنتاج حيواني</h4>
+            <p>يركز على تربية الحيوانات والدواجن وإدارة المزارع الحيوانية</p>
+            
+            <div class="branch-details">
+              <ul>
+                <li><i class="fas fa-book"></i> المواد: تغذية حيوان، وراثة وتحسين</li>
+                <li><i class="fas fa-clock"></i> مدة الدراسة: 3 سنوات</li>
+                <li><i class="fas fa-user-graduate"></i> مؤهل: دبلوم زراعي نظام 3 سنوات</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        
+        <!-- تكنولوجيا الأغذية -->
+        <div class="branch-card">
+          <div class="branch-img">
+            <img src="images\44.jpeg" alt="تكنولوجيا الأغذية">
+          </div>
+          <div class="branch-content">
+            <h4><i class="fas fa-utensils"></i> تكنولوجيا الأغذية</h4>
+            <p>يتناول تصنيع وحفظ المنتجات الزراعية والغذائية</p>
+            
+            <div class="branch-details">
+              <ul>
+                <li><i class="fas fa-book"></i> المواد: تصنيع غذائي، مراقبة جودة</li>
+                <li><i class="fas fa-clock"></i> مدة الدراسة: 3 سنوات</li>
+                <li><i class="fas fa-user-graduate"></i> مؤهل: دبلوم زراعي نظام 3 سنوات</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        
+        <!-- الزراعة العضوية -->
+        <div class="branch-card">
+          <div class="branch-img">
+            <img src="images\44.jpg" alt="الزراعة العضوية">
+          </div>
+          <div class="branch-content">
+            <h4><i class="fas fa-recycle"></i> الزراعة العضوية</h4>
+            <p>يركز على الزراعة المستدامة بدون استخدام كيماويات ضارة</p>
+            
+            <div class="branch-details">
+              <ul>
+                <li><i class="fas fa-book"></i> المواد: تسميد عضوي، مكافحة حيوية</li>
+                <li><i class="fas fa-clock"></i> مدة الدراسة: 3 سنوات</li>
+                <li><i class="fas fa-user-graduate"></i> مؤهل: دبلوم زراعي نظام 3 سنوات</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        
+        <!-- تكنولوجيا الري -->
+        <div class="branch-card">
+          <div class="branch-img">
+            <img src="images\55.jpg" alt="تكنولوجيا الري">
+          </div>
+          <div class="branch-content">
+            <h4><i class="fas fa-tint"></i> تكنولوجيا الري</h4>
+            <p>يشمل أنظمة الري الحديثة وترشيد استهلاك المياه</p>
+            
+            <div class="branch-details">
+              <ul>
+                <li><i class="fas fa-book"></i> المواد: هندسة ري، حساسات رطوبة</li>
+                <li><i class="fas fa-clock"></i> مدة الدراسة: 3 سنوات</li>
+                <li><i class="fas fa-user-graduate"></i> مؤهل: دبلوم زراعي نظام 3 سنوات</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        
+        <!-- الإنتاج الداجني -->
+        <div class="branch-card">
+          <div class="branch-img">
+            <img src="images/66.jpeg" alt="الإنتاج الداجني">
+          </div>
+          <div class="branch-content">
+            <h4><i class="fas fa-egg"></i> الإنتاج الداجني</h4>
+            <p>يتخصص في تربية الدواجن وإدارة مزارع البيض واللحم</p>
+            
+            <div class="branch-details">
+              <ul>
+                <li><i class="fas fa-book"></i> المواد: تغذية دواجن، أمراض دواجن</li>
+                <li><i class="fas fa-clock"></i> مدة الدراسة: 3 سنوات</li>
+                <li><i class="fas fa-user-graduate"></i> مؤهل: دبلوم زراعي نظام 3 سنوات</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="career-opportunities">
+      <h3><i class="fas fa-briefcase"></i> فرص العمل لخريجي الزراعي</h3>
+      
+      <div class="jobs-grid">
+        <div class="job-item">
+          <h4><i class="fas fa-tractor"></i> فني مزارع</h4>
+          <p>في المزارع الكبرى وشركات الإنتاج الزراعي</p>
+        </div>
+        
+        <div class="job-item">
+          <h4><i class="fas fa-flask"></i> فني مختبرات</h4>
+          <p>في معامل تحليل التربة والمياه</p>
+        </div>
+        
+        <div class="job-item">
+          <h4><i class="fas fa-warehouse"></i> فني تصنيع غذائي</h4>
+          <p>في مصانع الأغذية وشركات التعبئة</p>
+        </div>
+        
+        <div class="job-item">
+          <h4><i class="fas fa-clinic-medical"></i> فني رعاية حيوانية</h4>
+          <p>في مزارع الإنتاج الحيواني والداجني</p>
+        </div>
+        
+        <div class="job-item">
+          <h4><i class="fas fa-water"></i> فني ري</h4>
+          <p>في مشاريع الري الحديث وشركات الأنظمة الذكية</p>
+        </div>
+        
+        <div class="job-item">
+          <h4><i class="fas fa-seedling"></i> مرشد زراعي</h4>
+          <p>في الجمعيات الزراعية ومراكز الإرشاد</p>
+        </div>
+      </div>
+    </div>
+    
+    <div style="text-align: center;">
+      <a href="takasosat.html" class="back-btn">
+        <i class="fas fa-arrow-right"></i> العودة لقائمة التخصصات
+      </a>
+    </div>
+  </div>
+
+  <footer>
+    <div class="social-links">
+      <a href="#"><i class="fab fa-facebook"></i></a>
+      <a href="#"><i class="fab fa-twitter"></i></a>
+      <a href="#"><i class="fab fa-youtube"></i></a>
+      <a href="#"><i class="fab fa-instagram"></i></a>
+    </div>
+    <p>&copy; 2025 فنّي مصر - جميع الحقوق محفوظة</p>
+    <p>صمم بكل ❤️ لخدمة طلاب التعليم الفني</p>
+  </footer>
+</body>
+</html>
